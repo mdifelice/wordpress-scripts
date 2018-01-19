@@ -26,6 +26,7 @@ $totals  = wp_count_posts();
 $current = 0;
 $errors  = 0;
 $skipped = 0;
+$start   = time();
 
 while( true ) {         
 	$query = new WP_Query( array(
@@ -42,7 +43,7 @@ while( true ) {
 		$current++;
 
 		if ( 1 === $current ||
-			0 === $current % 100 ||
+			0 === $current % 10 ||
 			$current === count( $query->posts ) ) {
 			$print = true;
 		} else {
@@ -58,7 +59,7 @@ while( true ) {
 		} 
 
 		if ( $print ) {
-			printf( "Analyzed %s/%s (%s skipped, %s error/s)...\n", $current, $totals->pending, $skipped, $errors );
+			printf( "Removed %s/%s (%s skipped, %s error/s) in %s...\n", $current, $totals->pending, $skipped, $errors, date( 'i:s', time() - $start ) );
 		}
 	}
 }               
