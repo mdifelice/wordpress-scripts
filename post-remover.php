@@ -59,7 +59,9 @@ while( true ) {
 		} 
 
 		if ( $print ) {
-			printf( "Removed %s/%s (%s skipped, %s error/s) in %s...\n", $current, $totals->pending, $skipped, $errors, date( 'i:s', time() - $start ) );
+			$elapsed_time = time() - $start;
+
+			printf( "Removed %s/%s (%s skipped, %s error/s) in %s...\n", $current, $totals->pending, $skipped, $errors, ( $elapsed_time >= 3600 ? floor( $elapsed_time / 3600 ) . ':' : '' ) . date( 'i:s', $elapsed_time ) );
 		}
 	}
 }               
