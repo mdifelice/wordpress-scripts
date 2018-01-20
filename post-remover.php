@@ -53,8 +53,6 @@ while( true ) {
 
 		if ( ! should_delete( $post->ID ) ) {
 			$skipped++;
-
-			$status = 'Skipped';
 		} else if ( ! wp_delete_post( $post->ID, true ) ) {
 			$errors++;
 		} 
