@@ -29,10 +29,13 @@ $skipped = 0;
 $start   = time();
 
 while( true ) {         
+	$offset = $skipped + $errors;
+
 	$query = new WP_Query( array(
 		'post_type'      => 'post',
 		'post_status'    => 'pending',
 		'posts_per_page' => 200,
+		'offset'         => $offset,
 	) );
                 
 	if ( empty( $query->posts ) ) {
@@ -42,9 +45,7 @@ while( true ) {
 	foreach ( $query->posts as $post ) {
 		$current++;
 
-		if ( 1 === $current ||
-			0 === $current % 10 ||
-			$current === count( $query->posts ) ) {
+		if ( 0 === $current % 10 ) {
 			$print = true;
 		} else {
 			$print = false;
